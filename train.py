@@ -265,8 +265,6 @@ def train_knn_module():
         y_pr_p += knn.predict_proba(x_tests[i])
     y_pr = np.argmax(y_pr_p, axis=1)  # 预测结果
 
-    # 计算acc
-    acc = accuracy_score(y_test, y_pr)
     # 计算f1
     f1 = f1_score(y_test, y_pr, average='macro')
     # 计算G-mean
@@ -275,10 +273,9 @@ def train_knn_module():
     auc = roc_auc_score(label_binarize(y_test, np.arange(N_CLASS)), y_pr_p, average='macro')
 
     # 打印acc、f1、G-mean、auc
-    print('ACC: %.4f\t F1: %.4f\n'
-          'G-mean: %.4f\t AUC: %.4f' % (acc, f1, g_mean, auc))
+    print('F1: %.4f\t G-mean: %.4f\t AUC: %.4f' % (f1, g_mean, auc))
 
-    return acc, f1, g_mean, auc
+    return f1, g_mean, auc
 
 ################################################################################
 # 函数入口
